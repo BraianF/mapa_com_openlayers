@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Working with Openlayers</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<!-- Arquivo css do OpenLayers -->
+	<link rel="stylesheet" href="css/ol.css">
+	<style type="text/css">
+		#mapa{
+			width:100%;
+			height:600px;
+		}
+	</style>
+	<!-- O mapa tem que ter altura definida, senão aparece com 0 px-->
+
+	<script type="text/javascript">
+		LocationMaster = new Object();
+		LocationMaster.lookUpPosition=function(position){
+			this.latNow = position.coords.latitude;
+			this.longNow = position.coords.longitude;
+
+			// document.getElementById("mapHolder").src = "http://maps.google.com/maps?h1=en&ie=UTF8&11= " + this.latNow + ", " + this.longNow + "&spn=0.054166, 0.110378&z=13&output=embed";
+			carregaMapa(this.latNow, this.longNow);
+		}
+		
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(LocationMaster.lookUpPosition);
+		} 
+		else {
+			alert("Tente outro navegador. Este não funciona!");
+		}
+		
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row text-center my-5">
+			<h1 class="mx-auto">Openlayers + Geolocalização com HTML5</h1>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-11">
+				<div id='mapa'>
+				</div>
+			</div>
+			<div class="col-sm-4 col-10">
+				<h3>Localizações</h3>
+				<br>
+				<p>Seu local atual</p>
+				<p>Ilha das cabras - Balneário Camboriu</p>
+				<p>IFC - Camboriu</p>
+				<p>Área do IFC - Camboriú</p>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+<script src="js/ol.js"></script>
+<script src="js/locais.js" type="text/javascript"></script>
+<script src="js/map.js"></script>
+</html>
